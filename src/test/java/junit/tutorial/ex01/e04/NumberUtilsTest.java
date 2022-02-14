@@ -1,20 +1,24 @@
 package junit.tutorial.ex01.e04;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 class NumberUtilsTest {
 
-	@Autowired
-	private NumberUtils numberUtils;
+	@Test
+	@DisplayName("10を入力したテスト")
+	void test1() {
+		NumberUtils numberUtils = new NumberUtils();
+		assertTrue(numberUtils.isEven(10), "true");
+	}
 
 	@Test
-	public void test() {
-//		trueのケース
-		assertTrue(numberUtils.isEven(10), "true");
-//		falseのケース
+	@DisplayName("7を入力したテスト")
+	void test2() {
+		NumberUtils numberUtils = new NumberUtils();
 		assertFalse(numberUtils.isEven(7), "false");
 	}
 
