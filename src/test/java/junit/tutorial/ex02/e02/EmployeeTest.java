@@ -3,41 +3,42 @@ package junit.tutorial.ex02.e02;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class EmployeeTest {
 
-	try{
-		
-		File file = new File("/src/main/java/junit.tutorial/ex02/e02/Employee.txt");
-		FileReader fileReader = new FileReader(file);
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+	}
 
-		int ch = fileReader.read();
-		while (ch != -1) {
-			System.out.println((char) ch);
-			
-			ch = fileReader.read();
-		}
-	}catch(FileNotFoundException e){
-		
-		System.out.println(e);
-		
-	}catch(IOException ex){
-		
-		System.out.println(ex);
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+	}
+
+	@BeforeEach
+	void setUp() throws Exception {
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
 	}
 
 	@Test
-	void all(){
-		Employee emp = new Employee();
-		assertAll("emp", () -> assertEquals("Ichiro", emp.getFirstName(), "FirstName"),
-				() -> assertEquals("Tanaka", emp.getLastName(), "LastName"),
-				() -> assertEquals("ichiro@example.com", emp.getEmail(), "email"));
+	@DisplayName("loadのテスト")
+	void test1() {
+		InputStream input = getClass().getResourceAsStream("Employee.txt");
+		List<Employee> actual = Employee.load(input);
+		Employee employee = actual.get(0);
+		assertAll("csv", () -> assertEquals(1, actual.size()), () -> assertEquals("Ichiro", employee.getFirstName()),
+				() -> assertEquals("Tanaka", employee.getLastName()),
+				() -> assertEquals("ichiro@example.com", employee.getEmail()));
 	}
 }
-
