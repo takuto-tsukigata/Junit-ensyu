@@ -1,11 +1,12 @@
 package junit.tutorial.ex01.e03;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
 
 class CounterTest {
 
@@ -18,13 +19,13 @@ class CounterTest {
 		void setUp() throws Exception {
 			sut = new Counter();
 		}
-
+		
 		@Test
 		@DisplayName("incrementで1が取得できる")
 		void test1_1() {
 			assertEquals(1, sut.increment());
 		}
-
+		
 	}
 
 	@Nested
@@ -37,13 +38,13 @@ class CounterTest {
 			sut = new Counter();
 			sut.increment();
 		}
-
+		
 		@Test
 		@DisplayName("incrementで2が取得できる")
 		void test2_1() {
 			assertEquals(2, sut.increment());
 		}
-
+		
 	}
 
 	@Nested
@@ -58,12 +59,12 @@ class CounterTest {
 				sut.increment();
 			}
 		}
-
+		
 		@Test
 		@DisplayName("incrementで51が取得できる")
 		void test3_1() {
 			assertEquals(51, sut.increment());
 		}
-
+		
 	}
 }

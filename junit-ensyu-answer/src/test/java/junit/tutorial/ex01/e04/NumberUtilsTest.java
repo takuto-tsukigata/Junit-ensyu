@@ -1,6 +1,6 @@
-package junit.tutorial.ex01.e02;
+package junit.tutorial.ex01.e04;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -9,9 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CalculatorTest {
+import junit.tutorial.ex01.e04.NumberUtils;
 
-	Calculator calculator;
+class NumberUtilsTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -23,7 +23,6 @@ class CalculatorTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		calculator = new Calculator();
 	}
 
 	@AfterEach
@@ -31,8 +30,16 @@ class CalculatorTest {
 	}
 
 	@Test
-	@DisplayName("0除算でIllegalArgumentExceptionが発生する")
-	void test() {
-		assertThrows(IllegalArgumentException.class, () -> calculator.divide(10, 0));
+	@DisplayName("１０の時true")
+	void test1() {
+		assertTrue(NumberUtils.isEven(10));
 	}
+	
+	@Test
+	@DisplayName("７の時false")
+	void test2() {
+		assertFalse(NumberUtils.isEven(7));
+	}
+	
+
 }
